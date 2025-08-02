@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="module" src="../main.js"></script>
+</head>
+
+<body>
+    <div class="navigation">
+        <button class="nav-btn" onclick="location.href='../../index.html'">← Home</button>
+        <button class="nav-btn" onclick="location.href='registration.html'">← Registration</button>
+    </div>
+
+    <div class="forms-container">
+        <div class="weather-container">
+            <h2 class="weather-title">Weather Information</h2>
+            <form class="weather-form" id="weatherForm">
+                <div class="weather-form-group">
+                    <label for="city">City Name</label>
+                    <div class="weather-input-wrapper">
+                        <input type="text" id="city" name="city" placeholder="Enter city name..." required>
+                        <button type="submit" class="btn btn-primary" id="weatherBtn">
+                            <span class="btn-text">Get Data</span>
+                            <span class="btn-loader" style="display: none;">🌍</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="weather-data" id="weatherData" style="display: none;">
+                <div class="weather-card">
+                    <div class="weather-info">
+                        <div class="weather-icon">🌡️</div>
+                        <div class="weather-details">
+                            <h3>Weather Information</h3>
+                            <div class="data-grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weather-error" id="weatherError" style="display: none;">
+                <div class="error-card">
+                    <div class="error-icon">❌</div>
+                    <div class="error-text">
+                        <h3>Error</h3>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

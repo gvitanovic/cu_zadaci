@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/StarPic.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CU_test</title>
+  <link rel="stylesheet" href="/src/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1 class="hero-title">Task Title</h1>
+    </header>
+
+    <main>
+      <section class="section" aria-labelledby="navigation-heading">
+        <h2 id="navigation-heading" class="sr-only">Navigation Cards</h2>
+        <div class="section-top">
+          <article class="picture-container">
+            <img src="/LeftPicture.png" class="left-picture" alt="Left Picture" />
+            <div class="picture-text">
+              <h3>Left Picture</h3>
+              <p>Redirect user to "Hello World" page</p>
+              <button class="btn btn-primary" onclick="location.href='/src/pages/job.html'">Redirect me</button>
+            </div>
+          </article>
+          <article class="picture-container">
+            <img src="/RightPicture.png" class="right-picture" alt="Right Picture" />
+            <div class="picture-text">
+              <h3>Right Picture</h3>
+              <p>Redirect user to registration form</p>
+              <button class="btn btn-primary"
+                onclick="location.href='/src/pages/registration-weather-container.html'">Register</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="gallery-heading">
+        <header>
+          <h2 id="gallery-heading" class="section-title">Test Section</h2>
+        </header>
+        <div class="section-bottom" role="img" aria-label="Image gallery">
+          <figure>
+            <img src="/HoneyPic.png" class="bottom-img honney-picture" alt="Honey Picture" />
+            <figcaption class="sr-only">Honey Picture</figcaption>
+          </figure>
+          <figure>
+            <img src="/StarPic.png" class="bottom-img star-picture" alt="Star Picture" />
+            <figcaption class="sr-only">Star Picture</figcaption>
+          </figure>
+          <figure>
+            <img src="/DiamondPic.png" class="bottom-img diamond-picture" alt="Diamond Picture" />
+            <figcaption class="sr-only">Diamond Picture</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

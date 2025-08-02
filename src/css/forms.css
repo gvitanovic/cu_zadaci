@@ -1,0 +1,378 @@
+/* ===== FORM CONTAINERS ===== */
+.forms-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding: var(--space-6);
+}
+
+.registration-container,
+.weather-container {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--glass-shadow);
+    transition: all var(--transition-base);
+}
+
+.registration-container:hover,
+.weather-container:hover {
+    background: var(--glass-bg-strong);
+    box-shadow: var(--shadow-xl);
+}
+
+/* ===== FORM TITLES ===== */
+.registration-title,
+.weather-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    text-align: center;
+    position: relative;
+}
+
+/* ===== FORM LAYOUTS ===== */
+.registration-form,
+.weather-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.form-group,
+.weather-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.form-group label,
+.weather-form-group label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+/* Required field indicators */
+.form-group label .required-star {
+    color: var(--color-neutral-600);
+    transition: color var(--transition-fast);
+}
+
+.form-group.error label .required-star {
+    color: var(--color-error-500);
+}
+
+/* ===== INPUT STYLING ===== */
+.input-wrapper,
+.weather-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.form-group input,
+.weather-form-group input {
+    flex: 1;
+    padding: var(--space-4);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group input::placeholder,
+.weather-form-group input::placeholder {
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+.form-group input:focus,
+.weather-form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 4px rgba(100, 108, 255, 0.1), var(--shadow-md);
+    background: white;
+}
+
+.form-group input.error {
+    border-color: var(--color-error-500);
+    background-color: var(--color-error-50);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.form-group input.valid {
+    border-color: var(--color-success-500);
+    background-color: var(--color-success-50);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+/* ===== PASSWORD TOGGLE ===== */
+.password-toggle {
+    position: absolute;
+    right: var(--space-3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    color: var(--text-tertiary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-sm);
+}
+
+.password-toggle:hover {
+    color: var(--text-primary);
+    background: var(--glass-bg);
+}
+
+.password-toggle:active {
+    transform: scale(0.95);
+}
+
+/* ===== ERROR MESSAGES ===== */
+.error-message {
+    color: var(--color-error-600);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    margin-top: var(--space-1);
+    min-height: 1.2rem;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.error-message::before {
+    content: '⚠️';
+    font-size: var(--font-size-xs);
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== SUBMIT BUTTONS ===== */
+/* Buttons now inherit from global.css .btn .btn-primary styles */
+
+/* ===== WEATHER SPECIFIC STYLES ===== */
+.weather-input-wrapper {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.weather-input-wrapper input {
+    flex: 1;
+    margin: 0;
+}
+
+.btn-loader {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== WEATHER DATA DISPLAY ===== */
+.weather-data {
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: var(--glass-blur);
+}
+
+.weather-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.weather-info {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+}
+
+.weather-icon {
+    font-size: var(--font-size-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--glass-bg);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--glass-border);
+}
+
+.weather-details h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-4);
+}
+
+.data-item {
+    padding: var(--space-3);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.data-item:hover {
+    background: var(--glass-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.data-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-1);
+}
+
+.data-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+/* ===== WEATHER ERROR DISPLAY ===== */
+.weather-error {
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    background: linear-gradient(135deg, var(--color-error-50), var(--color-error-100));
+    border: 1px solid var(--color-error-200);
+    border-radius: var(--radius-xl);
+    color: var(--color-error-800);
+}
+
+.error-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.error-icon {
+    font-size: var(--font-size-2xl);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-error-300);
+}
+
+.error-text h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+}
+
+.error-text p {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Mobile breakpoint: 768px and below */
+@media (max-width: calc(var(--breakpoint-mobile) - 1px)) {
+    .forms-container {
+        padding: var(--space-4);
+        gap: var(--space-6);
+    }
+
+    .registration-container,
+    .weather-container {
+        padding: var(--space-6);
+    }
+
+    .registration-title,
+    .weather-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .weather-input-wrapper {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .weather-btn {
+        width: 100%;
+    }
+
+    .weather-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .error-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Mobile-specific form improvements */
+    .form-group {
+        margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+        min-height: 44px;
+        padding: var(--space-3);
+    }
+
+    .btn-primary {
+        min-height: 48px;
+        font-size: var(--font-size-base);
+        width: 100%;
+        margin-top: var(--space-4);
+    }
+}
