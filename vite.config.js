@@ -91,8 +91,8 @@ export default defineConfig({
                         });
                     }
 
-                    // Add navigation script and additional content
-                    const script = `<script>function showPage(page){document.querySelectorAll('[id$="-page"]').forEach(el=>el.style.display='none');document.querySelector('main').style.display='none';if(page==='home'){document.querySelector('main').style.display='block'}else{const pageEl=document.getElementById(page+'-page');if(pageEl)pageEl.style.display='block'}}</script>`;
+                    // Add navigation script with browser history support and additional content
+                    const script = `<script>function showPage(page,addToHistory=true){document.querySelectorAll('[id$="-page"]').forEach(el=>el.style.display='none');document.querySelector('main').style.display='none';if(page==='home'){document.querySelector('main').style.display='block'}else{const pageEl=document.getElementById(page+'-page');if(pageEl)pageEl.style.display='block'}if(addToHistory){const url=page==='home'?window.location.pathname:window.location.pathname+'#'+page;history.pushState({page:page},page,url)}}window.addEventListener('popstate',function(event){const page=event.state?.page||window.location.hash.slice(1)||'home';showPage(page,false)});document.addEventListener('DOMContentLoaded',function(){const initialPage=window.location.hash.slice(1)||'home';showPage(initialPage,false)})</script>`;
 
                     // Insert additional content and script before closing body
                     htmlContent = htmlContent.replace('</body>', additionalContent + script + '</body>');
