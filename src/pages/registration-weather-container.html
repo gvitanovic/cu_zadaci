@@ -13,15 +13,82 @@
     <div class="forms-container">
         <div class="registration-container">
             <h1 class="registration-title">Registration Form</h1>
-            <div id="registration-content">
-                <div class="loading">Loading registration form...</div>
-            </div>
+            <form class="registration-form" id="registrationForm" novalidate>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required-star">*</span></label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password <span class="required-star">*</span></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="password-toggle" data-target="password">👁️</button>
+                    </div>
+                    <div class="error-message" id="passwordError">Password must contain at least one uppercase letter,
+                        one lowercase letter, and one number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password <span class="required-star">*</span></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <button type="button" class="password-toggle" data-target="confirmPassword">👁️</button>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Mobile Phone Number</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="phone" name="phone" placeholder="+385 123-4567">
+                    </div>
+                    <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+            </form>
         </div>
 
         <div class="weather-container">
             <h2 class="weather-title">Weather Information</h2>
-            <div id="weather-content">
-                <div class="loading">Loading weather form...</div>
+            <form class="weather-form" id="weatherForm">
+                <div class="weather-form-group">
+                    <label for="city">City Name</label>
+                    <div class="weather-input-wrapper">
+                        <input type="text" id="city" name="city" placeholder="Enter city name..." required>
+                        <button type="submit" class="btn btn-primary" id="weatherBtn">
+                            <span class="btn-text">Get Data</span>
+                            <span class="btn-loader" style="display: none;">🌍</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="weather-data" id="weatherData" style="display: none;">
+                <div class="weather-card">
+                    <div class="weather-info">
+                        <div class="weather-icon">🌡️</div>
+                        <div class="weather-details">
+                            <h3>Weather Information</h3>
+                            <div class="data-grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weather-error" id="weatherError" style="display: none;">
+                <div class="error-card">
+                    <div class="error-icon">❌</div>
+                    <div class="error-text">
+                        <h3>Error</h3>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
