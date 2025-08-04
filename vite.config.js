@@ -38,20 +38,30 @@ export default defineConfig({
                     // Read and extract content from other pages
                     let additionalContent = '';
 
-                    if (fs.existsSync('src/pages/job.html')) {
-                        const jobHtml = fs.readFileSync('src/pages/job.html', 'utf8');
-                        let jobBody = jobHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || '';
-                        // Remove script tags from extracted content
-                        jobBody = jobBody.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
-                        additionalContent += `<div id="job-page" style="display:none;">${jobBody}</div>`;
-                    }
+                    // Dynamically find all HTML files in src/pages
+                    const pagesDir = 'src/pages';
+                    if (fs.existsSync(pagesDir)) {
+                        const htmlFiles = fs.readdirSync(pagesDir)
+                            .filter(file => file.endsWith('.html'))
+                            .map(file => path.join(pagesDir, file));
 
-                    if (fs.existsSync('src/pages/registration-weather-container.html')) {
-                        const regHtml = fs.readFileSync('src/pages/registration-weather-container.html', 'utf8');
-                        let regBody = regHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || '';
-                        // Remove script tags from extracted content
-                        regBody = regBody.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
-                        additionalContent += `<div id="registration-page" style="display:none;">${regBody}</div>`;
+                        htmlFiles.forEach(filePath => {
+                            const fileName = path.basename(filePath, '.html');
+                            const pageHtml = fs.readFileSync(filePath, 'utf8');
+                            let pageBody = pageHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || '';
+
+                            // Remove script tags from extracted content
+                            pageBody = pageBody.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+
+                            // Create page ID based on filename
+                            let pageId = fileName;
+                            // Handle special case mappings for existing functionality
+                            if (fileName === 'registration-weather-container') {
+                                pageId = 'registration';
+                            }
+
+                            additionalContent += `<div id="${pageId}-page" style="display:none;">${pageBody}</div>`;
+                        });
                     }
 
                     // Fix asset paths to point to single files
@@ -59,9 +69,27 @@ export default defineConfig({
                         .replace(/src="\.\/assets\/[^"]+\.js"/g, 'src="./app.js"')
                         .replace(/href="\.\/assets\/[^"]+\.css"/g, 'href="./app.css"')
                         .replace(/src="\.\/([^"]+\.(png|jpg|jpeg|gif|svg))"/g, 'src="../$1"')
-                        .replace(/href="\.\/([^"]+\.(png|jpg|jpeg|gif|svg))"/g, 'href="../$1"')
-                        .replace(/onclick="location\.href='[^']*job\.html'"/g, "onclick=\"showPage('job')\"")
-                        .replace(/onclick="location\.href='[^']*registration-weather-container\.html'"/g, "onclick=\"showPage('registration')\"");
+                        .replace(/href="\.\/([^"]+\.(png|jpg|jpeg|gif|svg))"/g, 'href="../$1"');
+
+                    // Dynamically replace onclick handlers for all HTML files
+                    if (fs.existsSync(pagesDir)) {
+                        const htmlFiles = fs.readdirSync(pagesDir)
+                            .filter(file => file.endsWith('.html'));
+
+                        htmlFiles.forEach(file => {
+                            const fileName = path.basename(file, '.html');
+                            let pageId = fileName;
+
+                            // Handle special case mappings
+                            if (fileName === 'registration-weather-container') {
+                                pageId = 'registration';
+                            }
+
+                            // Replace onclick handlers for this file
+                            const onclickPattern = new RegExp(`onclick="location\\.href='[^']*${fileName}\\.html'"`, 'g');
+                            htmlContent = htmlContent.replace(onclickPattern, `onclick="showPage('${pageId}')"`);
+                        });
+                    }
 
                     // Add navigation script and additional content
                     const script = `<script>function showPage(page){document.querySelectorAll('[id$="-page"]').forEach(el=>el.style.display='none');document.querySelector('main').style.display='none';if(page==='home'){document.querySelector('main').style.display='block'}else{const pageEl=document.getElementById(page+'-page');if(pageEl)pageEl.style.display='block'}}</script>`;
